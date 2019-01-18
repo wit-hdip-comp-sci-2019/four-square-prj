@@ -4,4 +4,7 @@ const fsConfig = {
   client_secret: "Your Secret"
 };
 
+const fsCredentials = '&client_id=' + fsConfig.client_id + '&client_secret=' + fsConfig.client_secret + '&v=20190101';
+
+console.log(fsConfig.base_url + 'near=Waterford,IE' + fsCredentials);
 console.log(fsConfig);
