@@ -12,5 +12,6 @@ const fsCredentials = '&client_id=' + fsConfig.client_id + '&client_secret=' + f
 console.log(fsConfig.base_url + 'near=Waterford,IE' + fsCredentials);
 
 axios.get(fsConfig.base_url + 'near=Waterford,IE' + fsCredentials).then(function(response) {
-  console.log(response);
+  var venues = response.data.response.groups[0].items;
+  console.log(venues);
 });
