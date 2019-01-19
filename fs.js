@@ -10,8 +10,8 @@ const fsConfig = {
 const fsCredentials = '&client_id=' + fsConfig.client_id + '&client_secret=' + fsConfig.client_secret + '&v=20190101';
 
 async function loadVenues(location) {
-  console.log(`Searching ${location}...`);
   const response = await axios.get(fsConfig.base_url + location + fsCredentials);
+  console.log(`Searching ${location}...`);
   var venues = response.data.response.groups[0].items;
   const venueCollection = [];
   for (let i = 0; i < venues.length; i++) {
