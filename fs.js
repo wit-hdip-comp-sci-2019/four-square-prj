@@ -11,18 +11,17 @@ const fsCredentials = '&client_id=' + fsConfig.client_id + '&client_secret=' + f
 
 function loadVenues(location) {
   console.log(`Searching ${location}...`);
-  axios.get(fsConfig.base_url + location + fsCredentials).then(function(response) {
-    var venues = response.data.response.groups[0].items;
-    const venueCollection = [];
-    for (let i = 0; i < venues.length; i++) {
-      const singleVenue = venues[i].venue;
-      const venue = {
-        name: singleVenue.name
-      };
-      venueCollection.push(venue);
-    }
-    console.log(venueCollection);
-  });
+  const response = axios.get(fsConfig.base_url + location + fsCredentials);
+  var venues = response.data.response.groups[0].items;
+  const venueCollection = [];
+  for (let i = 0; i < venues.length; i++) {
+    const singleVenue = venues[i].venue;
+    const venue = {
+      name: singleVenue.name
+    };
+    venueCollection.push(venue);
+  }
+  console.log(venueCollection);
 }
 
 loadVenues('near=Waterford,IE');
