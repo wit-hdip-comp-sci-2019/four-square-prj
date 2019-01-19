@@ -17,7 +17,9 @@ async function loadVenues(location) {
   for (let i = 0; i < venues.length; i++) {
     const singleVenue = venues[i].venue;
     const venue = {
-      name: singleVenue.name
+      name: singleVenue.name,
+      category: singleVenue.categories[0].name,
+      address: singleVenue.location
     };
     venueCollection.push(venue);
   }
