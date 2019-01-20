@@ -3,6 +3,7 @@ require('dotenv').config();
 
 const fsConfig = {
   base_url: 'https://api.foursquare.com/v2/venues/explore?',
+  venue_url: 'https://api.foursquare.com/v2/venues/',
   client_id: process.env.CLIENT_ID,
   client_secret: process.env.CLIENT_SECRET
 };
@@ -16,10 +17,11 @@ async function loadVenues(location) {
   const venueCollection = [];
   for (let i = 0; i < venues.length; i++) {
     const singleVenue = venues[i].venue;
+    const venueDetails = await axios.get(fsConfig.venue_url + singleVenue.id + '?' + fsCredentials);
     const venue = {
       name: singleVenue.name,
       category: singleVenue.categories[0].name,
-      address: singleVenue.location
+      address: singleVenue.location,
     };
     venueCollection.push(venue);
   }
