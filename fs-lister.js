@@ -1,17 +1,23 @@
-const axios = require('axios');
-require('dotenv').config();
-
 const fsConfig = {
   base_url: 'https://api.foursquare.com/v2/venues/explore?',
-  venue_url: 'https://api.foursquare.com/v2/venues/',
-  client_id: process.env.CLIENT_ID,
-  client_secret: process.env.CLIENT_SECRET
+  client_id: 'YOUR_ID',
+  client_secret: 'YOUR_CLIENT'
 };
 
 const fsCredentials = '&client_id=' + fsConfig.client_id + '&client_secret=' + fsConfig.client_secret + '&v=20190101';
 
+function populateTable(venues) {
+  $("#repo-table tbody").empty();
+  for (let i = 0; i < venues.length; i++) {
+    $("#repo-table tbody").append(`
+      <tr> 
+        <td>  ${venues[i].name} </td>
+        <td>  ${venues[i].category} </td>
+      </tr>`);
+  }
+}
+
 async function loadVenues(location) {
-  console.log (fsConfig.base_url + location + fsCredentials);
   const response = await axios.get(fsConfig.base_url + location + fsCredentials);
   console.log(`Searching ${location}...`);
   var venues = response.data.response.groups[0].items;
@@ -21,13 +27,15 @@ async function loadVenues(location) {
     const venue = {
       name: singleVenue.name,
       category: singleVenue.categories[0].name,
-      address: singleVenue.location,
+      address: singleVenue.category
     };
     venueCollection.push(venue);
   }
   console.log(venueCollection);
+  populateTable(venueCollection)
 }
 
-loadVenues('near=Waterford,IE');
-loadVenues('near=Tramore,IE');
-loadVenues('near=Dungarvan,IE');
+$('#fetch-btn').click(function() {
+  var location = $('#github-id').val();
+  loadVenues('near=' + location);
+});
