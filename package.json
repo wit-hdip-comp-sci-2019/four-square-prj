@@ -9,11 +9,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.18.0",
-    "dotenv": "^6.2.0"
+    "axios": "^0.19.1",
+    "dotenv": "^8.2.0"
   },
   "devDependencies": {
-    "prettier": "^1.15.3"
+    "prettier": "^1.19.1"
   },
   "prettier": {
     "singleQuote": true,
